@@ -1,0 +1,151 @@
+# COMPANION ASSETS (46 uploaded ONCE per repo at relative paths, NOT multiplied):
+[index-8bjih] vendor/baremux/index.js -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/baremux/index.js
+[index-8bjih] vendor/baremux/worker.js -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/baremux/worker.js
+[index-8bjih] vendor/baremux/LICENSE -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/baremux/LICENSE
+[index-8bjih] vendor/scram/scramjet.all.js -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/scram/scramjet.all.js
+[index-8bjih] vendor/scram/scramjet.wasm.wasm -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/scram/scramjet.wasm.wasm
+[index-8bjih] vendor/scram/scramjet.sync.js -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/scram/scramjet.sync.js
+[index-8bjih] vendor/scram/LICENSE -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/scram/LICENSE
+[index-8bjih] vendor/libcurl/index.mjs -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/libcurl/index.mjs
+[index-8bjih] vendor/libcurl/LICENSE -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/vendor/libcurl/LICENSE
+[index-8bjih] requirements.txt -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/requirements.txt
+[index-8bjih] README.md -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/README.md
+[index-8bjih] static/memes/WINDOWS-ERROR.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/WINDOWS-ERROR.mp3
+[index-8bjih] static/memes/BRUH.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/BRUH.mp3
+[index-8bjih] static/memes/Hi_How_Are_Ya.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Hi_How_Are_Ya.mp3
+[index-8bjih] static/memes/WOW.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/WOW.mp3
+[index-8bjih] static/memes/TACTICAL_NUKE.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/TACTICAL_NUKE.mp3
+[index-8bjih] static/memes/Titanic-Paroday.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Titanic-Paroday.mp3
+[index-8bjih] static/memes/HA!GOTEE!HA!.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/HA%21GOTEE%21HA%21.mp3
+[index-8bjih] static/memes/BOOMBAMBOP.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/BOOMBAMBOP.mp3
+[index-8bjih] static/memes/The_Screaming_Sheep.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/The_Screaming_Sheep.mp3
+[index-8bjih] static/memes/NOPE.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/NOPE.mp3
+[index-8bjih] static/memes/MINECRAFT_OOF.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/MINECRAFT_OOF.mp3
+[index-8bjih] static/memes/Wait_a_minute....mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Wait_a_minute....mp3
+[index-8bjih] static/memes/FBI_OPEN_UP.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/FBI_OPEN_UP.mp3
+[index-8bjih] static/memes/Sadness-3.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Sadness-3.mp3
+[index-8bjih] static/memes/Sadness-2.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Sadness-2.mp3
+[index-8bjih] static/memes/NO_GOD_PLEASE_NO.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/NO_GOD_PLEASE_NO.mp3
+[index-8bjih] static/memes/SHREK-SWAMP.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/SHREK-SWAMP.mp3
+[index-8bjih] static/memes/TBC.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/TBC.mp3
+[index-8bjih] static/memes/OH!!!!!!!.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/OH%21%21%21%21%21%21%21.mp3
+[index-8bjih] static/memes/MEANWHILE.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/MEANWHILE.mp3
+[index-8bjih] static/memes/HUH.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/HUH.mp3
+[index-8bjih] static/memes/Metal_Boom.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Metal_Boom.mp3
+[index-8bjih] static/memes/OH_NO_NO_NO.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/OH_NO_NO_NO.mp3
+[index-8bjih] static/memes/INCEPTION.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/INCEPTION.mp3
+[index-8bjih] static/memes/Hello_There.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Hello_There.mp3
+[index-8bjih] static/memes/MY_LEG.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/MY_LEG.mp3
+[index-8bjih] static/memes/YEET.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/YEET.mp3
+[index-8bjih] static/memes/RIMSHOT.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/RIMSHOT.mp3
+[index-8bjih] static/memes/Sadness-1.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/Sadness-1.mp3
+[index-8bjih] static/memes/WINDOWS-STARTUP.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/WINDOWS-STARTUP.mp3
+[index-8bjih] static/memes/DING.mp3 -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/memes/DING.mp3
+[index-8bjih] static/sw.js -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/static/sw.js
+[index-8bjih] chat.py -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/chat.py
+[index-8bjih] wisp.py -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/wisp.py
+[index-8bjih] app.py -> https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/app.py
+
+==================================================
+
+# MULTIPLIED LINKS (100 total across 1 sites via standard):
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0001/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0001/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0001/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0001/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0001/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0001/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0001/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0001/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0001/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0001/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0002/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0002/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0002/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0002/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0002/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0002/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0002/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0002/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0002/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0002/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0003/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0003/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0003/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0003/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0003/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0003/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0003/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0003/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0003/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0003/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0004/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0004/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0004/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0004/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0004/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0004/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0004/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0004/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0004/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0004/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0005/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0005/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0005/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0005/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0005/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0005/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0005/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0005/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0005/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0005/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0006/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0006/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0006/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0006/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0006/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0006/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0006/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0006/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0006/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0006/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0007/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0007/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0007/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0007/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0007/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0007/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0007/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0007/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0007/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0007/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0008/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0008/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0008/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0008/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0008/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0008/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0008/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0008/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0008/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0008/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0009/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0009/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0009/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0009/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0009/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0009/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0009/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0009/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0009/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0009/index.html
+https://cdn.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0010/index.html
+https://fastly.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0010/index.html
+https://gcore.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0010/index.html
+https://testingcf.jsdelivr.net/gh/lovesickastro/index-8bjih@main/v0010/index.html
+https://cdn.statically.io/gh/lovesickastro/index-8bjih/main/v0010/index.html
+https://rawcdn.githack.com/lovesickastro/index-8bjih/main/v0010/index.html
+https://raw.githack.com/lovesickastro/index-8bjih/main/v0010/index.html
+https://raw.githubusercontent.com/lovesickastro/index-8bjih/main/v0010/index.html
+https://esm.sh/gh/lovesickastro/index-8bjih@main/v0010/index.html
+https://raw.esm.sh/gh/lovesickastro/index-8bjih@main/v0010/index.html
