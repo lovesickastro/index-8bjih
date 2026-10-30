@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rel Zone</title>
+<style>
+:root{--bg:#07090f;--panel:#0e1220;--panel2:#151a2c;--text:#e8ecf7;--muted:#8a93ad;--line:#232a42;--accent:#5ee0ff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1f3fa;--panel:#fff;--panel2:#e8ebf6;--text:#14182a;--muted:#5d6682;--line:#d3d8ea}}
+:root[data-theme="light"]{--bg:#f1f3fa;--panel:#fff;--panel2:#e8ebf6;--text:#14182a;--muted:#5d6682;--line:#d3d8ea}
+:root[data-theme="dark"]{--bg:#07090f;--panel:#0e1220;--panel2:#151a2c;--text:#e8ecf7;--muted:#8a93ad;--line:#232a42}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+body.cursive h1,body.cursive h2,body.cursive .brand{font-family:"Brush Script MT","Segoe Script",cursive;letter-spacing:.02em}
+#fog{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#glow{position:fixed;width:260px;height:260px;margin:-130px 0 0 -130px;border-radius:50%;pointer-events:none;z-index:1;
+background:radial-gradient(circle,color-mix(in srgb,var(--accent) 28%,transparent),transparent 65%);left:-999px;top:-999px}
+body.perf #fog,body.perf #glow{display:none}
+#app{position:relative;z-index:2;display:flex;height:100%}
+nav{width:76px;background:color-mix(in srgb,var(--panel) 88%,transparent);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:6px}
+.brand{font-weight:700;color:var(--accent);font-size:15px;margin-bottom:10px}
+nav button{width:60px;background:none;border:0;color:var(--muted);padding:10px 0;border-radius:12px;cursor:pointer;font:inherit;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button span{font-size:20px}
+nav button:hover{background:var(--panel2);color:var(--text)}
+nav button.on{background:var(--panel2);color:var(--accent)}
+nav .sp{flex:1}
+main{flex:1;overflow:auto;padding:28px;min-width:0}
+.view{display:none;max-width:900px;margin:0 auto}.view.on{display:block}
+.hero{text-align:center;padding:9vh 0 4vh}
+h1{font-size:clamp(48px,12vw,96px);margin:0;color:var(--accent);text-shadow:0 0 40px color-mix(in srgb,var(--accent) 45%,transparent);font-weight:300;letter-spacing:.08em}
+.hero p{color:var(--muted);margin:8px 0 22px}
+.search{display:flex;gap:8px;max-width:480px;margin:0 auto}
+input[type=text]{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:12px 16px;border-radius:999px;font:inherit;outline:none;min-width:0}
+input[type=text]:focus{border-color:var(--accent)}
+.btn{background:var(--accent);color:#04121a;border:0;padding:11px 20px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:var(--panel2);color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;transition:.15s;text-align:left;color:inherit;font:inherit}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .e{font-size:30px}.card b{display:block;margin-top:8px}.card small{color:var(--muted)}
+h2{margin:0 0 6px;font-weight:400}
+.sub{color:var(--muted);margin:0 0 18px}
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:16px}
+canvas#snake{background:var(--bg);border-radius:10px;max-width:100%;touch-action:none}
+.pad{display:grid;grid-template-columns:repeat(3,52px);gap:6px}.pad button{height:46px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:18px;cursor:pointer}
+.mem{display:grid;grid-template-columns:repeat(4,70px);gap:8px}
+.mem button{height:70px;font-size:30px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer}
+.mem button.up{background:var(--panel);border-color:var(--accent)}.mem button.done{opacity:.35}
+.ttt{display:grid;grid-template-columns:repeat(3,80px);gap:6px}
+.ttt button{height:80px;font-size:36px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--accent);cursor:pointer}
+.keys{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.key{width:56px;height:140px;background:var(--panel2);border:1px solid var(--line);border-radius:0 0 10px 10px;color:var(--muted);display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;user-select:none;font-size:12px}
+.key.hit{background:var(--accent);color:#04121a}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.row small{display:block;color:var(--muted)}
+.sw{appearance:none;width:42px;height:24px;background:var(--panel2);border:1px solid var(--line);border-radius:99px;position:relative;cursor:pointer;flex:none}
+.sw:after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:.15s}
+.sw:checked{background:color-mix(in srgb,var(--accent) 35%,var(--panel2))}.sw:checked:after{left:20px;background:var(--accent)}
+select{background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:8px;border-radius:8px;font:inherit}
+input[type=color]{border:0;width:40px;height:30px;background:none;padding:0;cursor:pointer}
+.status{color:var(--muted);min-height:20px}
+.chat{display:flex;flex-direction:column;height:min(62vh,560px);background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+#log{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:85%;padding:10px 14px;border-radius:14px;white-space:pre-wrap;line-height:1.45;overflow-wrap:anywhere}
+.msg.me{align-self:flex-end;background:var(--accent);color:#04121a}
+.msg.bot{align-self:flex-start;background:var(--panel2)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 10px}
+.chips button{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:99px;cursor:pointer;font:inherit;font-size:13px}
+.chips button:hover{border-color:var(--accent)}
+.compose{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+@media(max-width:560px){nav{width:58px}nav button{width:50px;font-size:10px}main{padding:16px}.mem{grid-template-columns:repeat(4,62px)}.mem button{height:62px}.key{width:40px}}
+#web{max-width:none}
+#web.on{display:flex;flex-direction:column;gap:8px;height:calc(100vh - 56px);height:calc(100dvh - 56px)}
+.wbar{display:flex;gap:8px}
+.wbar .btn{padding:10px 16px}
+#web iframe{flex:1;min-height:0;width:100%;border:1px solid var(--line);border-radius:12px;background:#fff}
+#web iframe[hidden]{display:none}
+.soundgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:20px}
+.sound{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:left;color:var(--text);font:inherit;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:12px}
+.sound:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sound .si{font-size:26px}.sound b{display:block}.sound small{color:var(--muted)}
+.sound.playing{border-color:var(--accent);box-shadow:0 0 20px color-mix(in srgb,var(--accent) 22%,transparent)}
+.soundtools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:16px 0}.soundtools input{flex:1;min-width:180px}
+nav button{position:relative}
+.dot{position:absolute;top:6px;right:9px;width:10px;height:10px;border-radius:50%;background:#ff5d6c;box-shadow:0 0 0 2px var(--panel)}
+.dot[hidden]{display:none}
+#clog{flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.cmsg{max-width:88%;padding:8px 12px;border-radius:12px;background:var(--panel2);align-self:flex-start;line-height:1.4;overflow-wrap:anywhere}
+.cmsg.me{align-self:flex-end;background:color-mix(in srgb,var(--accent) 24%,var(--panel2))}
+.cmsg .ch{display:flex;gap:8px;align-items:baseline;font-size:13px}
+.cmsg .ch small{color:var(--muted);font-size:11px}
+.cmsg .cb{white-space:pre-wrap}
+.csys{align-self:center;color:var(--muted);font-size:12px;text-align:center}
+.cnickrow{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;margin:0 0 10px}
+.cnickrow input{flex:none;width:160px;padding:7px 14px}
+#conline{font-size:14px;font-weight:400;color:var(--muted)}
+.discord{position:fixed;right:18px;bottom:16px;z-index:5;max-width:calc(100vw - 110px);background:color-mix(in srgb,var(--panel) 90%,transparent);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;color:var(--muted);line-height:1.35;word-break:break-word}
+.discord a{color:color-mix(in srgb,var(--accent) 60%,var(--text));font-weight:600;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.discord a:hover{text-decoration-thickness:2px}
+@media(max-width:700px){.discord{position:static;margin:22px auto 8px;width:fit-content;max-width:100%;text-align:center}}
+</style>
+</head>
+<body>
+<canvas id="fog"></canvas><div id="glow"></div>
+<div id="app">
+<nav>
+  <div class="brand">rel zone</div>
+  <button data-v="home" class="on"><span>⌂</span>home</button>
+  <button data-v="games"><span>🎮</span>games</button>
+  <button data-v="music"><span>🎹</span>music</button>
+  <button data-v="sounds"><span>🔊</span>sounds</button>
+  <button data-v="ai"><span>✨</span>ai</button>
+  <button data-v="web"><span>🌐</span>web</button>
+  <button data-v="chat"><span>💬</span>chat<i class="dot" id="cdot" hidden></i></button>
+  <div class="sp"></div>
+  <button data-v="settings"><span>⚙</span>settings</button>
+</nav>
+<main>
+<section class="view on" id="home">
+  <div class="hero"><h1>Rel Zone</h1><p id="greet">welcome back</p>
+    <div class="search"><input id="q" type="text" placeholder="search the hub…" autocomplete="off"><button class="btn" id="go">go</button></div>
+  </div>
+  <div class="grid" id="tiles"></div>
+  <div class="discord">join the Discord: <a href="https://discord.gg/jEmDJQFj45" target="_blank" rel="noopener noreferrer">https://discord.gg/jEmDJQFj45</a></div>
+</section>
+
+<section class="view" id="games">
+  <h2>games</h2><p class="sub">100+ real browser games · each one opens inside Rel Zone through the proxy.</p>
+  <div class="grid" id="gamelist"></div>
+  <div class="stage" id="stage" hidden></div>
+</section>
+
+<section class="view" id="sounds">
+  <h2>meme soundboard 🔊</h2><p class="sub">31 meme sounds — click a button to play one.</p>
+  <div class="soundtools"><input id="soundq" type="text" placeholder="search sounds…" autocomplete="off"><button class="btn ghost" id="stopSound">■ stop</button></div>
+  <div class="soundgrid" id="soundgrid"></div>
+</section>
+
+<section class="view" id="music">
+  <h2>piano</h2><p class="sub">Tap the keys or press A S D F G H J K.</p>
+  <div class="stage"><div class="keys" id="keys"></div>
+    <div class="row" style="border:0;width:100%;max-width:320px"><span>wave</span>
+    <select id="wave"><option>sine</option><option>triangle</option><option>square</option><option>sawtooth</option></select></div></div>
+</section>
+
+<section class="view" id="ai">
+  <h2>rel ai</h2><p class="sub">Ask questions, get help with homework, brainstorm or write. It can make mistakes, so double-check important answers. (v7)</p>
+  <div class="chat"><div id="log"></div>
+    <div class="chips" id="chips"></div>
+    <div class="compose"><input id="aiq" type="text" placeholder="ask anything…" autocomplete="off"><button class="btn" id="aisend">send</button><button class="btn ghost" id="ainew">new</button></div></div>
+</section>
+
+<section class="view" id="chat">
+  <h2>global chat <span id="conline"></span></h2>
+  <p class="sub">Everyone on this Rel Zone server talks here, live. Be kind. <span id="cstatus"></span></p>
+  <div class="cnickrow">chatting as <input id="cnick" type="text" maxlength="20" autocomplete="off" placeholder="your name"></div>
+  <div class="chat"><div id="clog"></div>
+    <div class="compose"><input id="cin" type="text" maxlength="300" placeholder="say something…" autocomplete="off"><button class="btn" id="csend">send</button></div></div>
+</section>
+
+<section class="view" id="web">
+  <div class="wbar"><button class="btn ghost" id="wback" title="back">←</button><button class="btn ghost" id="wreload" title="reload">⟳</button>
+    <input id="wurl" type="text" placeholder="search or enter an address…" autocomplete="off"><button class="btn" id="wgo">go</button></div>
+  <div class="status" id="wstatus">Pages and games load inside Rel Zone through the proxy. Search from home or type an address.</div>
+  <iframe id="sjframe" title="web" hidden allow="fullscreen; autoplay; gamepad; clipboard-write"></iframe>
+  <iframe id="wframe" sandbox="allow-scripts allow-forms" title="web (basic)" hidden></iframe>
+</section>
+
+<section class="view" id="settings">
+  <h2>settings</h2><p class="sub">Saved in this browser only.</p>
+  <div class="row"><div>accent color<small>the main color used everywhere</small></div><input type="color" id="accent" value="#5ee0ff"></div>
+  <div class="row"><div>theme<small>follow your device or force one</small></div><select id="theme"><option value="auto">auto</option><option value="dark">dark</option><option value="light">light</option></select></div>
+  <div class="row"><div>fog background<small>animated fog behind everything</small></div><input type="checkbox" class="sw" id="fogOn" checked></div>
+  <div class="row"><div>cursor glow<small>soft light that follows the mouse</small></div><input type="checkbox" class="sw" id="glowOn" checked></div>
+  <div class="row"><div>cursive font<small>fancy font for titles</small></div><input type="checkbox" class="sw" id="cursive"></div>
+  <div class="row"><div>performance mode<small>turns off fog and glow if it lags</small></div><input type="checkbox" class="sw" id="perf"></div>
+  <div class="row"><div>search engine<small>used by the home search box</small></div><select id="engine"><option value="https://duckduckgo.com/?q=">DuckDuckGo</option><option value="https://www.google.com/search?q=">Google</option><option value="https://www.bing.com/search?q=">Bing</option></select></div>
+  <div class="row"><div>reset<small>put every setting back to default</small></div><button class="btn ghost" id="reset">reset</button></div>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var DEF={accent:"#5ee0ff",theme:"auto",fog:true,glow:true,cursive:false,perf:false,engine:"https://duckduckgo.com/?q="};
+var S=Object.assign({},DEF);
+try{var raw=localStorage.getItem("oxy-settings");if(raw)S=Object.assign(S,JSON.parse(raw))}catch(e){}
+function save(){try{localStorage.setItem("oxy-settings",JSON.stringify(S))}catch(e){}}
+
+function apply(){
+  var r=document.documentElement;
+  r.style.setProperty("--accent",S.accent);
+  if(S.theme==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",S.theme);
+  document.body.classList.toggle("cursive",S.cursive);
+  document.body.classList.toggle("perf",S.perf);
+  $("#fog").style.display=(S.fog&&!S.perf)?"block":"none";
+  $("#glow").style.display=(S.glow&&!S.perf)?"block":"none";
+  $("#accent").value=S.accent;$("#theme").value=S.theme;$("#fogOn").checked=S.fog;
+  $("#glowOn").checked=S.glow;$("#cursive").checked=S.cursive;$("#perf").checked=S.perf;$("#engine").value=S.engine;
+}
+$("#accent").oninput=function(e){S.accent=e.target.value;save();apply()};
+$("#theme").onchange=function(e){S.theme=e.target.value;save();apply()};
+$("#engine").onchange=function(e){S.engine=e.target.value;save()};
+[["fogOn","fog"],["glowOn","glow"],["cursive","cursive"],["perf","perf"]].forEach(function(p){
+  $("#"+p[0]).onchange=function(e){S[p[1]]=e.target.checked;save();apply()}});
+$("#reset").onclick=function(){S=Object.assign({},DEF);save();apply()};
+
+var h=new Date().getHours();
+$("#greet").textContent=h<5?"up late?":h<12?"good morning":h<18?"good afternoon":"good evening";
+
+/* navigation */
+function show(v){
+  $$(".view").forEach(function(x){x.classList.toggle("on",x.id===v)});
+  $$("nav button").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});
+  if(v!=="games")stopGame();
+  if(v==="chat")chatOnShow();
+}
+$$("nav button").forEach(function(b){b.onclick=function(){show(b.dataset.v)}});
+var tiles=[["🎮","games","Snake, memory and tic-tac-toe","games"],["🔊","soundboard","31 meme sound effects","sounds"],["🎹","piano","Play notes with your keyboard","music"],["✨","ai","Ask Rel AI for help with anything","ai"],["💬","chat","Talk to everyone on the server","chat"],["⚙","settings","Colors, fog, cursor and more","settings"]];
+$("#tiles").innerHTML=tiles.map(function(t){return '<button class="card" data-v="'+t[3]+'"><div class="e">'+t[0]+'</div><b>'+t[1]+'</b><small>'+t[2]+'</small></button>'}).join("");
+$$("#tiles .card").forEach(function(c){c.onclick=function(){show(c.dataset.v)}});
+function search(){var q=$("#q").value.trim();if(q)openWeb(q)}
+$("#go").onclick=search;$("#q").onkeydown=function(e){if(e.key==="Enter")search()};
+
+/* meme soundboard */
+var soundFiles=[
+"BOOMBAMBOP.mp3","BRUH.mp3","DING.mp3","FBI OPEN UP.mp3","HA!GOTEE!HA!.mp3","Hello There.mp3","Hi How Are Ya.mp3","HUH.mp3","INCEPTION.mp3","MEANWHILE.mp3","Metal Boom.mp3","MINECRAFT OOF.mp3","MY LEG.mp3","NO GOD PLEASE NO.mp3","NOPE.mp3","OH NO NO NO.mp3","OH!!!!!!!.mp3","RIMSHOT.mp3","Sadness-1.mp3","Sadness-2.mp3","Sadness-3.mp3","SHREK-SWAMP.mp3","TACTICAL NUKE.mp3","TBC.mp3","The Screaming Sheep.mp3","Titanic-Paroday.mp3","Wait a minute....mp3","WINDOWS-ERROR.mp3","WINDOWS-STARTUP.mp3","WOW.mp3","YEET.mp3"
+];
+var soundNames={"BOOMBAMBOP.mp3":"BOOM BAM BOP","BRUH.mp3":"BRUH","DING.mp3":"DING","FBI OPEN UP.mp3":"FBI OPEN UP","HA!GOTEE!HA!.mp3":"HA! GOT EEE! HA!","Hello There.mp3":"Hello There","Hi How Are Ya.mp3":"Hi How Are Ya","HUH.mp3":"HUH?!","INCEPTION.mp3":"Inception","MEANWHILE.mp3":"Meanwhile","Metal Boom.mp3":"Metal Boom","MINECRAFT OOF.mp3":"Minecraft Oof","MY LEG.mp3":"MY LEG!","NO GOD PLEASE NO.mp3":"NO GOD PLEASE NO","NOPE.mp3":"NOPE","OH NO NO NO.mp3":"OH NO NO NO","OH!!!!!!!.mp3":"OH!!!!!!!","RIMSHOT.mp3":"Rimshot","Sadness-1.mp3":"Sadness 1","Sadness-2.mp3":"Sadness 2","Sadness-3.mp3":"Sadness 3","SHREK-SWAMP.mp3":"Shrek Swamp","TACTICAL NUKE.mp3":"TACTICAL NUKE","TBC.mp3":"To Be Continued","The Screaming Sheep.mp3":"Screaming Sheep","Titanic-Paroday.mp3":"Titanic Parody","Wait a minute....mp3":"Wait a minute…","WINDOWS-ERROR.mp3":"Windows Error","WINDOWS-STARTUP.mp3":"Windows Startup","WOW.mp3":"WOW","YEET.mp3":"YEET"};
+var soundIcons=["💥","💀","🔔","🚨","😂","🧔","👋","🗿","🎬","⏳","💣","⛏️","🦵","😭","🙅","😱","😮","🥁","😢","😢","😢","🧅","☢️","⏱️","🐑","🚢","👀","🪟","🪟","😮","🦅"];
+var currentSound=null;
+function soundLabel(f){return soundNames[f]||f.replace(/\.mp3$/i,'').replace(/[-_]/g,' ')}
+function stopSound(){if(currentSound){currentSound.pause();currentSound.currentTime=0;currentSound=null} $$(".sound.playing").forEach(function(b){b.classList.remove("playing")})}
+function renderSounds(){
+  var q=(($("#soundq")&&$("#soundq").value)||"").trim().toLowerCase();
+  var out=[];
+  soundFiles.forEach(function(f,i){var n=soundLabel(f);if(q&&n.toLowerCase().indexOf(q)<0)return;out.push('<button class="sound" data-sound="'+encodeURIComponent(f)+'"><span class="si">'+soundIcons[i]+'</span><span><b>'+escapeHtml(n)+'</b><small>click to play</small></span></button>')});
+  $("#soundgrid").innerHTML=out.join("")||'<p class="status">No sounds found.</p>';
+  $$("#soundgrid .sound").forEach(function(b){b.onclick=function(){
+    stopSound();
+    var f=decodeURIComponent(b.dataset.sound);currentSound=new Audio("/memes/"+encodeURIComponent(f).replace(/%2F/g,"/"));b.classList.add("playing");
+    currentSound.play().catch(function(){});currentSound.onended=function(){b.classList.remove("playing");currentSound=null};
+  }});
+}
+function escapeHtml(x){return String(x).replace(/[&<>"']/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]})}
+$("#soundq").oninput=renderSounds;$("#stopSound").onclick=stopSound;renderSounds();
+
+/* fog + cursor */
+var fc=$("#fog"),fx=fc.getContext("2d"),blobs=[],W,H;
+function size(){W=fc.width=innerWidth;H=fc.height=innerHeight}
+size();addEventListener("resize",size);
+for(var i=0;i<6;i++)blobs.push({x:Math.random(),y:Math.random(),r:.25+Math.random()*.25,dx:(Math.random()-.5)*.00025,dy:(Math.random()-.5)*.00025});
+function fog(){
+  if(S.fog&&!S.perf){
+    fx.clearRect(0,0,W,H);
+    blobs.forEach(function(b){
+      b.x+=b.dx;b.y+=b.dy;if(b.x<-.1||b.x>1.1)b.dx*=-1;if(b.y<-.1||b.y>1.1)b.dy*=-1;
+      var R=b.r*Math.max(W,H),g=fx.createRadialGradient(b.x*W,b.y*H,0,b.x*W,b.y*H,R);
+      g.addColorStop(0,S.accent+"26");g.addColorStop(1,S.accent+"00");
+      fx.fillStyle=g;fx.fillRect(0,0,W,H);
+    });
+  }
+  requestAnimationFrame(fog);
+}
+fog();
+addEventListener("pointermove",function(e){var g=$("#glow");g.style.left=e.clientX+"px";g.style.top=e.clientY+"px"});
+
+/* games: 100 real browser games loaded through Rel Zone's proxy */
+var stopFn=null;
+function stopGame(){if(stopFn){stopFn();stopFn=null}var st=$("#stage");st.hidden=true;st.innerHTML=""}
+var gameLinks=[
+["1v1.LOL","https://1v1.lol/","🔫"],["Drift Boss","https://driftboss.io/","🏎️"],["Geometry Dash","https://www.geometrydash.com/","🟩"],["Slope","https://slopegame.io/","⛷️"],["Shell Shockers","https://shellshock.io/","🥚"],["Krunker","https://krunker.io/","🎯"],["Agar.io","https://agar.io/","🟢"],["Slither.io","https://slither.io/","🐍"],["Diep.io","https://diep.io/","🛡️"],["Paper.io","https://paper-io.com/","📄"],
+["ZombsRoyale.io","https://zombsroyale.io/","🧟"],["Smash Karts","https://smashkarts.io/","🏎️"],["Kour.io","https://kour.io/","🎯"],["Ev.io","https://ev.io/","⚡"],["Venge.io","https://venge.io/","🔫"],["Bullet Force","https://www.bulletforce.com/","💥"],["Forward Assault","https://www.forwardassault.io/","🎯"],["Repuls.io","https://repuls.io/","🚀"],["Voxiom.io","https://voxiom.io/","🧱"],["Bonk.io","https://bonk.io/","⚽"],
+["Gats.io","https://gats.io/","🔫"],["Surviv.io","https://surviv.io/","🪖"],["Superhex.io","https://superhex.io/","⬡"],["Little Big Snake","https://littlebigsnake.com/","🐍"],["Wormate.io","https://wormate.io/","🍬"],["Hole.io","https://holeio.com/","⚫"],["Snowball.io","https://snowball.io/","❄️"],["MooMoo.io","https://moomoo.io/","🌳"],["Starve.io","https://starve.io/","🔥"],
+["Narwhale.io","https://narwhale.io/","🐋"],["Tetr.io","https://tetr.io/","🧩"],["Chess.com","https://www.chess.com/play/computer","♟️"],["Lichess","https://lichess.org/","♟️"],["Skribbl.io","https://skribbl.io/","✏️"],["Gartic Phone","https://garticphone.com/","📞"],["Little Alchemy 2","https://littlealchemy2.com/","🧪"],["Cookie Clicker","https://orteil.dashnet.org/cookieclicker/","🍪"],["2048","https://2048game.com/","🔢"],
+["Hextris","https://hextris.io/","⬡"],["Flappy Bird","https://flappybird.io/","🐦"],["Moto X3M","https://motox3m.co/","🏍️"],["Vex 6","https://vex6.io/","🏃"],["Vex 7","https://vex7.io/","🏃"],["Vex 8","https://vex8.io/","🏃"],["Run 3","https://run3.io/","🏃"],["Tunnel Rush","https://tunnelrush.io/","🌀"],["Fireboy & Watergirl","https://fireboywatergirl.io/","🔥"],["Action Games Hub","https://www.crazygames.com/c/action","🎮"],
+["Driving Games","https://www.crazygames.com/c/driving","🚗"],["Shooting Games","https://www.crazygames.com/c/shooting","🔫"],["Multiplayer Games","https://www.crazygames.com/c/multiplayer","👥"],["Racing Games","https://www.crazygames.com/c/racing","🏁"],["Sports Games","https://www.crazygames.com/c/sports","⚽"],["Puzzle Games","https://www.crazygames.com/c/puzzle","🧩"],["Arcade Games","https://www.crazygames.com/c/arcade","🕹️"],["IO Games","https://www.crazygames.com/c/io","🌐"],["Two Player Games","https://www.crazygames.com/c/2-player","👥"],["Strategy Games","https://www.crazygames.com/c/strategy","♟️"],
+["Action Games - Poki","https://poki.com/en/action","⚔️"],["Racing Games - Poki","https://poki.com/en/racing","🏎️"],["Sports Games - Poki","https://poki.com/en/sports","🏀"],["2 Player Games - Poki","https://poki.com/en/two-player","👥"],["Puzzle Games - Poki","https://poki.com/en/puzzle","🧩"],["Arcade Games - Poki","https://poki.com/en/arcade","🕹️"],["Adventure Games - Poki","https://poki.com/en/adventure","🗺️"],["Shooting Games - Poki","https://poki.com/en/shooting","🎯"],[".io Games - Poki","https://poki.com/en/io","🌐"],["New Games - Poki","https://poki.com/en/new","✨"],
+["Action Games - Coolmath","https://www.coolmathgames.com/1-action-games","⚡"],["Logic Games - Coolmath","https://www.coolmathgames.com/1-logic-games","🧠"],["Skill Games - Coolmath","https://www.coolmathgames.com/1-skill-games","🎯"],["Strategy Games - Coolmath","https://www.coolmathgames.com/1-strategy-games","♟️"],["Sports Games - Coolmath","https://www.coolmathgames.com/1-sports-games","🏀"],["Fireboy & Watergirl 2","https://www.coolmathgames.com/0-fireboy-and-water-girl-2","🔥"],["Fireboy & Watergirl 3","https://www.coolmathgames.com/0-fireboy-and-water-girl-3","🔥"],["Run 2","https://www.coolmathgames.com/0-run-2","🏃"],["Run 3 - Coolmath","https://www.coolmathgames.com/0-run-3","🏃"],["World's Hardest Game","https://www.coolmathgames.com/0-worlds-hardest-game","💀"],
+["Papa's Pizzeria","https://www.coolmathgames.com/0-papas-pizzeria","🍕"],["Papa's Freezeria","https://www.coolmathgames.com/0-papas-freezeria","🍦"],["Bloxorz","https://www.coolmathgames.com/0-bloxorz","🧊"],["Action Turnip","https://www.coolmathgames.com/0-action-turnip","🥕"],["Bob the Robber","https://www.coolmathgames.com/0-bob-the-robber","🥷"],["Fireboy & Watergirl 4","https://www.coolmathgames.com/0-fireboy-and-water-girl-4","🔥"],["Adventures of Pip","https://www.coolmathgames.com/0-adventures-of-pip","🗺️"],["Soccer Random","https://www.coolmathgames.com/0-soccer-random","⚽"],["Basket Random","https://www.coolmathgames.com/0-basket-random","🏀"],["Boxing Random","https://www.coolmathgames.com/0-boxing-random","🥊"],
+["Drift Hunters","https://www.crazygames.com/game/drift-hunters","🏎️"],["Super Star Car","https://www.crazygames.com/game/super-star-car","🏁"],["Highway Traffic","https://www.crazygames.com/game/highway-traffic","🚘"],["Moto X3M Pool Party","https://www.crazygames.com/game/moto-x3m-pool-party","🏍️"],["Stickman Hook","https://www.crazygames.com/game/stickman-hook","🪝"],["Raft Wars","https://www.crazygames.com/game/raft-wars","🛶"],["Action King: Draw Fight","https://www.crazygames.com/game/action-king-draw-fight","🥊"],["Getaway Shootout","https://www.crazygames.com/game/getaway-shootout","🏃"],["House of Hazards","https://www.crazygames.com/game/house-of-hazards","🏠"],["Masked Forces","https://www.crazygames.com/game/masked-forces","🎯"],["Bloxd.io","https://bloxd.io/","🧱"],["Miniblox","https://miniblox.io/","🧊"],["BuildNow GG","https://buildnow.gg/","🔫"],["Zombs.io","https://zombs.io/","🧟"],["Hordes.io","https://hordes.io/","⚔️"],["Survivor.io","https://survivor.io/","🧟"],["Mope.io","https://mope.io/","🐾"],["Chess Arena","https://www.chess.com/play/online","♟️"]
+];
+function renderGames(){
+  $("#gamelist").innerHTML=gameLinks.map(function(g,i){return '<button class="card" data-i="'+i+'"><div class="e">'+g[2]+'</div><b>'+g[0]+'</b><small>plays inside Rel Zone</small></button>'}).join("");
+  $$("#gamelist .card").forEach(function(c){c.onclick=function(){var g=gameLinks[+c.dataset.i];openGame(g[1],g[0])}});
+}
+function openGame(url,name){openWeb(url)}
+renderGames();
+
+/* ai (served by the Python backend) */
+var hist=[],busy=false,ctl=null;
+var log=$("#log");
+function addMsg(role,text){var m=document.createElement("div");m.className="msg "+role;m.textContent=text;log.appendChild(m);log.scrollTop=log.scrollHeight;return m}
+function aiReset(){hist=[];log.innerHTML="";addMsg("bot","Hi! I'm Rel AI. What are we working on?")}
+["Solve a problem","Check my work","Quiz me","Fix my writing"].forEach(function(t){
+  var b=document.createElement("button");b.textContent=t;b.onclick=function(){$("#aiq").value=t+": ";$("#aiq").focus()};$("#chips").appendChild(b)});
+async function ask(){
+  var q=$("#aiq").value.trim();if(!q||busy)return;
+  addMsg("me",q);$("#aiq").value="";
+  hist.push({role:"user",content:q});
+  var out=addMsg("bot","…"),acc="";busy=true;$("#aisend").disabled=true;
+  try{
+    ctl=new AbortController();
+    var r=await fetch("/api/chat",{method:"POST",signal:ctl.signal,headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({messages:hist.slice(-12)})});
+    if(!r.ok){var er=new Error("http");er.status=r.status;try{er.detail=(await r.json()).detail}catch(_){}throw er}
+    var rd=r.body.getReader(),dec=new TextDecoder(),buf="";
+    for(;;){
+      var c=await rd.read();if(c.done)break;
+      buf+=dec.decode(c.value,{stream:true});
+      var lines=buf.split("\n");buf=lines.pop();
+      lines.forEach(function(l){
+        l=l.trim();if(l.indexOf("data:")!==0)return;
+        var d=l.slice(5).trim();if(!d||d==="[DONE]")return;
+        try{var t=JSON.parse(d).choices[0].delta.content;if(t){acc+=t;out.textContent=acc;log.scrollTop=log.scrollHeight}}catch(_){}
+      });
+    }
+    if(!acc)throw new Error("empty");
+    hist.push({role:"assistant",content:acc});
+  }catch(e){
+    if(e&&e.name==="AbortError")return;
+    out.textContent=!e||!e.status?"Can't reach the Rel Zone server ("+((e&&e.message)||"no response")+"). Open the site through python app.py at http://127.0.0.1:5000, not by double-clicking the HTML file.":
+      e.status===429?"Rate limited. Wait a moment, then send again.":
+      e.status===500?"Rel AI isn't set up on the server yet (missing GROQ_API_KEY in .env).":
+      e.status===401||e.status===403?"Groq rejected the API key. It may be wrong or revoked. Make a new one and put it in .env, then restart the server.":
+      "AI error ("+e.status+")"+(e.detail?": "+e.detail:"")+".";
+    try{var hc=await (await fetch("/api/health")).json();
+      out.textContent+="\n\nDiagnosis: "+(hc.problem||hc.result||"server check passed")}catch(_){}
+    hist.pop();
+  }
+  busy=false;$("#aisend").disabled=false;
+}
+$("#aisend").onclick=ask;$("#aiq").onkeydown=function(e){if(e.key==="Enter")ask()};
+$("#ainew").onclick=function(){if(ctl)ctl.abort();busy=false;$("#aisend").disabled=false;aiReset()};
+aiReset();
+
+/* global chat (WebSocket to /ws/chat on this server) */
+var chatWs=null,chatTry=0,chatLog=$("#clog"),chatDot=$("#cdot");
+function lsGet(k){try{return localStorage.getItem(k)}catch(_){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(_){}}
+$("#cnick").value=lsGet("rz_nick")||"guest"+(1000+Math.floor(Math.random()*9000));
+function chatOpen(){return $("#chat").classList.contains("on")}
+function nearBottom(){return chatLog.scrollTop+chatLog.clientHeight>=chatLog.scrollHeight-80}
+function trimChat(){while(chatLog.children.length>200)chatLog.removeChild(chatLog.firstChild)}
+function addSys(text){var d=document.createElement("div");d.className="csys";d.textContent=text;chatLog.appendChild(d);trimChat();chatLog.scrollTop=chatLog.scrollHeight}
+function addChat(m){
+  var stick=m.me||nearBottom();
+  var row=document.createElement("div");row.className="cmsg"+(m.me?" me":"");
+  var h=document.createElement("div");h.className="ch";
+  var n=document.createElement("b");n.textContent=m.nick;
+  var t=document.createElement("small");t.textContent="#"+m.tag+" · "+new Date(m.ts*1000).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
+  h.appendChild(n);h.appendChild(t);
+  var b=document.createElement("div");b.className="cb";b.textContent=m.text;   /* text only, never HTML */
+  row.appendChild(h);row.appendChild(b);chatLog.appendChild(row);trimChat();
+  if(stick)chatLog.scrollTop=chatLog.scrollHeight;
+}
+function onChat(d){
+  if(d.t==="history"){chatLog.innerHTML="";d.msgs.forEach(addChat);if(!d.msgs.length)addSys("No messages yet. Say hi!");chatLog.scrollTop=chatLog.scrollHeight}
+  else if(d.t==="msg"){var empty=chatLog.firstChild&&chatLog.firstChild.className==="csys"&&/^No messages/.test(chatLog.firstChild.textContent);if(empty)chatLog.innerHTML="";addChat(d);if(!d.me&&!chatOpen())chatDot.hidden=false}
+  else if(d.t==="online"){$("#conline").textContent="· "+d.n+" online"}
+  else if(d.t==="you"){$("#cnick").value=d.nick;lsSet("rz_nick",d.nick)}
+  else if(d.t==="error"){addSys(d.text)}
+}
+function chatConnect(){
+  if(chatWs&&chatWs.readyState<2)return;
+  $("#cstatus").textContent="connecting…";
+  var ws=new WebSocket((location.protocol==="https:"?"wss":"ws")+"://"+location.host+"/ws/chat");chatWs=ws;
+  ws.onopen=function(){chatTry=0;$("#cstatus").textContent="";ws.send(JSON.stringify({t:"hello",nick:$("#cnick").value}))};
+  ws.onmessage=function(e){var d;try{d=JSON.parse(e.data)}catch(_){return}onChat(d)};
+  ws.onclose=function(){if(chatWs!==ws)return;$("#conline").textContent="";$("#cstatus").textContent="disconnected, retrying…";setTimeout(chatConnect,Math.min(15000,1000*Math.pow(2,chatTry++)))};
+  ws.onerror=function(){try{ws.close()}catch(_){}};
+}
+function chatOnShow(){chatDot.hidden=true;chatConnect()}
+function chatSend(){
+  var v=$("#cin").value.trim();if(!v)return;
+  if(!chatWs||chatWs.readyState!==1){addSys("Not connected yet, one moment…");return}
+  chatWs.send(JSON.stringify({t:"msg",text:v}));$("#cin").value="";
+}
+$("#csend").onclick=chatSend;$("#cin").onkeydown=function(e){if(e.key==="Enter")chatSend()};
+$("#cnick").onchange=function(){if(chatWs&&chatWs.readyState===1)chatWs.send(JSON.stringify({t:"hello",nick:$("#cnick").value}))};
+
+/* web: full in-browser proxy (Scramjet + Wisp), with the basic /proxy as a fallback */
+var mode=null,sj=null,sjFrame=null,sjInit=null;
+var LITE="BASIC proxy: JavaScript and cookies are OFF, games won't run. Open this site at http://localhost:"+(location.port||"5000")+" or over https for the full proxy";
+var wh=[],wi=-1,expect=null,wf=$("#wframe"),wbar=$("#wurl"),wst=$("#wstatus");
+function looksUrl(q){return /^https?:\/\//i.test(q)||/^[^\s\/]+\.[a-z]{2,}(\/\S*)?$/i.test(q)}
+function fullUrl(input){return /^https?:\/\//i.test(input)?input:looksUrl(input)?"https://"+input:S.engine+encodeURIComponent(input)}
+function liteUrl(input){
+  if(looksUrl(input))return /^https?:\/\//i.test(input)?input:"https://"+input;
+  var e=S.engine;
+  if(e.indexOf("duckduckgo")>-1)e="https://html.duckduckgo.com/html/?q=";
+  else if(e.indexOf("google")>-1)e="https://www.google.com/search?gbv=1&q=";
+  return e+encodeURIComponent(input);
+}
+function loadScript(src){return new Promise(function(res,rej){var t=document.createElement("script");t.src=src;t.onload=res;t.onerror=function(){rej(new Error("couldn't load "+src))};document.head.appendChild(t)})}
+function startProxy(){
+  if(sjInit)return sjInit;
+  sjInit=(async function(){
+    if(!window.isSecureContext||!("serviceWorker" in navigator))throw new Error("the full proxy needs https or http://localhost");
+    await loadScript("/scram/scramjet.all.js");await loadScript("/baremux/index.js");
+    sj=new ($scramjetLoadController().ScramjetController)({files:{wasm:"/scram/scramjet.wasm.wasm",all:"/scram/scramjet.all.js",sync:"/scram/scramjet.sync.js"}});
+    await sj.init();
+    await navigator.serviceWorker.register("/sw.js");
+    await navigator.serviceWorker.ready;
+    var conn=new BareMux.BareMuxConnection("/baremux/worker.js");
+    await conn.setTransport("/libcurl/index.mjs",[{websocket:(location.protocol==="https:"?"wss":"ws")+"://"+location.host+"/wisp/"}]);
+    sjFrame=sj.createFrame($("#sjframe"));
+    sjFrame.addEventListener("urlchange",function(e){wbar.value=e.url;wst.textContent="full proxy (JavaScript + cookies on) · "+e.url});
+    return true;
+  })();
+  sjInit.catch(function(){});
+  return sjInit;
+}
+function liteLoad(url){expect=url;wbar.value=url;wst.textContent="loading (basic proxy)…";wf.src="/proxy?url="+encodeURIComponent(url)}
+async function openWeb(input){
+  input=input.trim();if(!input)return;
+  show("web");wst.textContent="starting proxy…";
+  try{
+    await startProxy();
+    mode="sj";wf.hidden=true;$("#sjframe").hidden=false;
+    var u=fullUrl(input);wbar.value=u;wst.textContent="loading…";sjFrame.go(u);
+  }catch(err){
+    console.warn("full proxy unavailable:",err);
+    mode="lite";$("#sjframe").hidden=true;wf.hidden=false;
+    var t=liteUrl(input);wh=wh.slice(0,wi+1);wh.push(t);wi=wh.length-1;liteLoad(t);
+    wst.textContent=LITE+" ("+(err&&err.message||err)+")";
+  }
+}
+addEventListener("message",function(e){
+  if(mode!=="lite"||e.source!==wf.contentWindow||!e.data||!e.data.rz||typeof e.data.url!=="string")return;
+  var u=e.data.url;wbar.value=u;wst.textContent=LITE+" · "+u;
+  if(expect!==null){expect=null;wh[wi]=u}
+  else if(u!==wh[wi]){wh=wh.slice(0,wi+1);wh.push(u);wi=wh.length-1}
+});
+wf.onload=function(){if(mode==="lite"&&wst.textContent==="loading (basic proxy)…")wst.textContent="done"};
+$("#sjframe").onload=function(){if(mode==="sj"&&/^loading/.test(wst.textContent))wst.textContent="full proxy (JavaScript + cookies on) · "+wbar.value};
+$("#wgo").onclick=function(){openWeb(wbar.value)};
+wbar.onkeydown=function(e){if(e.key==="Enter")openWeb(wbar.value)};
+$("#wback").onclick=function(){if(mode==="sj")sjFrame.back();else if(wi>0){wi--;liteLoad(wh[wi])}};
+$("#wreload").onclick=function(){if(mode==="sj")sjFrame.reload();else if(wi>=0)liteLoad(wh[wi])};
+
+/* piano */
+var ac=null,notes=[["C",261.63,"a"],["D",293.66,"s"],["E",329.63,"d"],["F",349.23,"f"],["G",392,"g"],["A",440,"h"],["B",493.88,"j"],["C",523.25,"k"]];
+function play(f){
+  try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();
+    var o=ac.createOscillator(),g=ac.createGain();o.type=$("#wave").value;o.frequency.value=f;
+    g.gain.setValueAtTime(.0001,ac.currentTime);g.gain.exponentialRampToValueAtTime(.3,ac.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+1.1);
+    o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+1.2)}catch(e){}
+}
+var kb=$("#keys");
+notes.forEach(function(n){var k=document.createElement("div");k.className="key";k.innerHTML=n[0]+"<br>&nbsp;"+n[2];k.dataset.k=n[2];
+  function hit(){play(n[1]);k.classList.add("hit");setTimeout(function(){k.classList.remove("hit")},150)}
+  k.onpointerdown=hit;k._hit=hit;kb.appendChild(k)});
+addEventListener("keydown",function(e){
+  if($("#music").classList.contains("on")&&!e.repeat){var k=kb.querySelector('[data-k="'+e.key.toLowerCase()+'"]');if(k)k._hit()}});
+
+apply();
+})();
+</script>
+</body>
+</html>
